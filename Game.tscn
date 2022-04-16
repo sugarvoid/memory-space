@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://pico-8-1x.png" type="Texture" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
@@ -7,14 +7,10 @@
 [ext_resource path="res://Square.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Ball.gd" type="Script" id=6]
 [ext_resource path="res://Segment.tscn" type="PackedScene" id=7]
-[ext_resource path="res://PICO-8 mono.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://pico_12.tres" type="DynamicFont" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2, 7.5 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 4
-font_data = ExtResource( 8 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -84,7 +80,7 @@ margin_left = 1.0
 margin_top = 1.0
 margin_right = 41.0
 margin_bottom = 15.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = ExtResource( 8 )
 text = "Level: 000"
 
 [connection signal="area_entered" from="Ball/Area2D" to="Ball" method="_on_Area2D_area_entered"]

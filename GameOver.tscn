@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://pico-8-1x.png" type="Texture" id=1]
+[ext_resource path="res://pico_12.tres" type="DynamicFont" id=2]
+
+[node name="GameOver" type="Node2D"]
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 130, 134 )
+scale = Vector2( 132, 135 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1, 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 45.0
+margin_top = 56.0
+margin_right = 85.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 2 )
+text = "Game Over"
