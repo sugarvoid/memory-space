@@ -1,8 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://pico_12.tres" type="DynamicFont" id=1]
+[ext_resource path="res://PICO-8 mono.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://pico-8-1x.png" type="Texture" id=2]
 [ext_resource path="res://MainScreen.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 8
+font_data = ExtResource( 1 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "blink"
@@ -35,16 +43,16 @@ margin_left = 36.0
 margin_top = 36.0
 margin_right = 88.0
 margin_bottom = 50.0
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "TITLE"
 align = 1
 
 [node name="Label" type="Label" parent="."]
-margin_left = 19.0
-margin_top = 76.0
-margin_right = 106.0
-margin_bottom = 90.0
-custom_fonts/font = ExtResource( 1 )
+margin_left = 11.0
+margin_top = 78.0
+margin_right = 115.0
+margin_bottom = 92.0
+custom_fonts/font = SubResource( 3 )
 text = "PRESS [SPACE]"
 align = 1
 

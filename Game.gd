@@ -11,14 +11,16 @@ onready var square4 = get_node("Row/Square4")
 
 var rng :RandomNumberGenerator
 var current_level: int
+var is_round_over: bool = false
 
 enum GAME_STATE {
-	BEFORE,
+	BEFORE_ROUND,
 	DURING,
-	AFTER
+	AFTER,
+	POST_ROUND
 }
 
-var state = GAME_STATE.BEFORE
+var state = GAME_STATE.BEFORE_ROUND
 
 var current_pattern : Array = [
 	null, null, null, null, null
@@ -27,7 +29,7 @@ var player_seleted_pattern : Array = [
 	null, null, null, null, null
 ]
 
-var player_current_guess: int = 0
+var player_current_guess: int
 
 func _ready():
 	current_level = 1
@@ -35,30 +37,27 @@ func _ready():
 	
 
 func _process(delta):
-	print(current_pattern)
+	print(player_current_guess)
 	$LblLevel.text = level_string % str(current_level)
 	
 	match(state):
-		GAME_STATE.BEFORE:
-			
+		GAME_STATE.BEFORE_ROUND:
 			$AnimationPlayer.play("start_round")
 		GAME_STATE.DURING:
 			if player_current_guess == 5:
 				$Wheel/Ball.stop_rotating()
 				$Instructions2.visible = false
-				self.state = GAME_STATE.AFTER
-		GAME_STATE.AFTER:
-			#check arrary
-			_check_results()
-			print(player_seleted_pattern)
-			print(current_pattern)
-			if(player_seleted_pattern == current_pattern):
-				current_level += 1
-				print('match')
-				######state = GAME_STATE.BEFORE
-			else:
-				var _x = get_tree().change_scene("res://GameOver.tscn")
-			
+				self.state = GAME_STATE.POST_ROUND
+
+		GAME_STATE.POST_ROUND:
+			if !is_round_over:
+				_check_results()
+				$PostRoundTimer.start(4)
+				is_round_over = true
+				
+
+func _reset_player_guess() -> void:
+	player_current_guess = 0
 
 func _generate_new_pattern():
 	for n in 5:
@@ -110,3 +109,25 @@ func _input(event):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == 'start_round':
 		self.state = GAME_STATE.DURING
+
+func _start_new_round():
+	is_round_over = false
+	player_current_guess = 0
+	_generate_new_pattern()
+	state = GAME_STATE.BEFORE_ROUND
+
+func _on_PostRoundTimer_timeout():
+	
+	for n in $Row.get_children():
+		n.hide_result()
+		n.squre_sprite.frame = 4
+	
+#	for n in 5:
+#		$Row.get_child(n).hide_result()
+#		$Row.get_child(n).squre_sprite.frame = 4
+	
+	if(player_seleted_pattern == current_pattern):
+		current_level += 1
+		_start_new_round()
+	else:
+		var _x = get_tree().change_scene("res://GameOver.tscn")

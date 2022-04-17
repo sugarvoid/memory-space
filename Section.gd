@@ -28,6 +28,9 @@ func set_result_sprite(correct: bool) -> void:
 func show_result() -> void:
 	result_sprite.visible = true
 
+func hide_result() -> void:
+	result_sprite.visible = false
+
 func _ready() -> void:
 	_reset_section()
 	

@@ -22,9 +22,12 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 1, 2, 5.4, 6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.3, 1, 2, 5.4, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "_reset_player_guess"
+}, {
 "args": [  ],
 "method": "_generate_new_pattern"
 }, {
@@ -158,5 +161,12 @@ align = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/start_round = SubResource( 2 )
 
+[node name="PostRoundTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Wheel/Ball/Area2D" to="Wheel/Ball" method="_on_Area2D_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="PostRoundTimer" to="." method="_on_PostRoundTimer_timeout"]
