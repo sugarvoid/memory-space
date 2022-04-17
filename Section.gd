@@ -28,25 +28,25 @@ func set_result_sprite(correct: bool) -> void:
 func show_result() -> void:
 	result_sprite.visible = true
 
+
 func hide_result() -> void:
 	result_sprite.visible = false
 
+
 func _ready() -> void:
 	_reset_section()
-	
-	
+
 
 func _reset_section() -> void:
 	self.result_sprite.visible = false
 	self.squre_sprite.frame = 4
 
+
 func flip_over() -> void:
 	$AnimationPlayer.play("y_scale_down")
-	
-	
 
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_AnimationPlayer_animation_finished(anim_name) -> void:
 	if anim_name == "y_scale_down":
 		#change sprite to right frame
 		_match_color_to_sprite()

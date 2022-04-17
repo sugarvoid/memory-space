@@ -2,8 +2,6 @@ extends Area2D
 
 export var color : String
 
-func _ready():
-	pass
 
 func get_color() -> int:
 	match(self.color):

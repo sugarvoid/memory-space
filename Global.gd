@@ -13,6 +13,3 @@ const COLORS_2 : Dictionary = {
 	2: "Red",
 	3: "Green"
 }
-
-func _ready():
-	pass

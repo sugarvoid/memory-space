@@ -11,8 +11,8 @@ config_version=4
 [application]
 
 config/name="regame"
-run/main_scene="res://SplashScreen.tscn"
-boot_splash/image="res://boot_image.png"
+run/main_scene="res://scene/SplashScreen.tscn"
+boot_splash/image="res://image/boot_image.png"
 config/icon="res://icon.png"
 
 [autoload]

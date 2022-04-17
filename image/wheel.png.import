@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pico-8-1x.png-87c06ea7dd896d83e2feeae7673ad9a6.stex"
+path="res://.import/wheel.png-1c5946d0f1878495ea256daf97b5ddc0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pico-8-1x.png"
-dest_files=[ "res://.import/pico-8-1x.png-87c06ea7dd896d83e2feeae7673ad9a6.stex" ]
+source_file="res://image/wheel.png"
+dest_files=[ "res://.import/wheel.png-1c5946d0f1878495ea256daf97b5ddc0.stex" ]
 
 [params]
 
