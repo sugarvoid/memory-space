@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _ready() -> void:
-	pass
+	$AnimationPlayer.play("blink")
 
 
 func _input(event) -> void:

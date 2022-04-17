@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://font/PICO-8 mono.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://script/GameOver.gd" type="Script" id=2]
@@ -7,6 +7,23 @@
 [sub_resource type="DynamicFont" id=1]
 size = 8
 font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "blink"
+length = 1.52
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="GameOver" type="Node2D"]
 script = ExtResource( 2 )
@@ -19,13 +36,25 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1, 1 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -29.0
-margin_top = 36.0
-margin_right = 163.0
-margin_bottom = 85.0
+margin_left = -8.0
+margin_top = 84.0
+margin_right = 147.0
+margin_bottom = 107.0
+custom_fonts/font = SubResource( 1 )
+text = "Press Space To 
+Try Again"
+align = 1
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 38.0
+margin_right = 116.0
+margin_bottom = 74.0
 custom_fonts/font = SubResource( 1 )
 text = "Game Over
 
-Press Space To 
-Try Again"
+"
 align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/blink = SubResource( 2 )

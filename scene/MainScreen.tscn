@@ -9,11 +9,12 @@ size = 8
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 8
+size = 4
 font_data = ExtResource( 1 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "blink"
+length = 1.517
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Label:visible")
@@ -22,7 +23,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -49,10 +50,10 @@ Space"
 align = 1
 
 [node name="Label" type="Label" parent="."]
-margin_left = 11.0
-margin_top = 78.0
-margin_right = 115.0
-margin_bottom = 92.0
+margin_left = 10.0
+margin_top = 85.0
+margin_right = 114.0
+margin_bottom = 99.0
 custom_fonts/font = SubResource( 3 )
 text = "PRESS [SPACE]"
 align = 1
