@@ -17,15 +17,10 @@ func _match_color_to_sprite() -> void:
 func _ready() -> void:
 	_match_color_to_sprite()
 	
-func _input(event):
-	if event.is_action_released("ui_accept"):
-		flip_over()
+
 
 func flip_over() -> void:
 	$AnimationPlayer.play("y_scale_down")
-	
-	
-	
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

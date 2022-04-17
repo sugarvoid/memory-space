@@ -1,8 +1,28 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://pico-8-1x.png" type="Texture" id=1]
+[ext_resource path="res://pico_12.tres" type="DynamicFont" id=2]
+[ext_resource path="res://SplashScreen.gd" type="Script" id=3]
+[ext_resource path="res://sound/324881_frankum_intros-outros-and-effects.ogg" type="AudioStream" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "rise_up"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 30, 135 ), Vector2( 30, 55 ) ]
+}
 
 [node name="SplashScreen" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="Sprite2" type="Sprite" parent="."]
 position = Vector2( 130, 134 )
@@ -10,3 +30,21 @@ scale = Vector2( 132, 135 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1, 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 30.0
+margin_top = 111.0
+margin_right = 98.0
+margin_bottom = 136.0
+custom_fonts/font = ExtResource( 2 )
+text = "Kitargo
+Games"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/rise_up = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

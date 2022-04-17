@@ -1,9 +1,27 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://pico_12.tres" type="DynamicFont" id=1]
 [ext_resource path="res://pico-8-1x.png" type="Texture" id=2]
+[ext_resource path="res://MainScreen.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "blink"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="MainScreen" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="Sprite2" type="Sprite" parent="."]
 position = Vector2( 130, 134 )
@@ -12,10 +30,23 @@ texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1, 1 )
 
-[node name="Label" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 margin_left = 36.0
-margin_top = 76.0
+margin_top = 36.0
 margin_right = 88.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 1 )
+text = "TITLE"
+align = 1
+
+[node name="Label" type="Label" parent="."]
+margin_left = 19.0
+margin_top = 76.0
+margin_right = 106.0
 margin_bottom = 90.0
 custom_fonts/font = ExtResource( 1 )
 text = "PRESS [SPACE]"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/blink = SubResource( 1 )

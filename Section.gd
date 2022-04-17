@@ -16,14 +16,16 @@ func _match_color_to_sprite() -> void:
 			squre_sprite.frame = 2
 		Global.COLORS.GREEN:
 			squre_sprite.frame = 3
-			
-func _set_result_sprite(correct: bool) -> void:
+
+
+func set_result_sprite(correct: bool) -> void:
 	if correct:
 		result_sprite.frame = 0
 	else:
 		result_sprite.frame = 1
-		
-func _show_result() -> void:
+
+
+func show_result() -> void:
 	result_sprite.visible = true
 
 func _ready() -> void:

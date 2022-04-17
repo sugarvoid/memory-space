@@ -1,16 +1,28 @@
 extends Node2D
 
+
+const level_string = "Level: %s"
+
 onready var square0 = get_node("Row/Square0")
 onready var square1 = get_node("Row/Square1")
 onready var square2 = get_node("Row/Square2")
 onready var square3 = get_node("Row/Square3")
 onready var square4 = get_node("Row/Square4")
 
+var rng :RandomNumberGenerator
+var current_level: int
+
+enum GAME_STATE {
+	BEFORE,
+	DURING,
+	AFTER
+}
+
+var state = GAME_STATE.BEFORE
 
 var current_pattern : Array = [
-	2,0,1,2,3
+	null, null, null, null, null
 ]
-
 var player_seleted_pattern : Array = [
 	null, null, null, null, null
 ]
@@ -18,40 +30,83 @@ var player_seleted_pattern : Array = [
 var player_current_guess: int = 0
 
 func _ready():
-	pass
+	current_level = 1
+	rng = RandomNumberGenerator.new()
+	
 
 func _process(delta):
-	if player_current_guess == 5:
-		$Wheel/Ball.stop_rotating()
+	print(current_pattern)
+	$LblLevel.text = level_string % str(current_level)
+	
+	match(state):
+		GAME_STATE.BEFORE:
+			
+			$AnimationPlayer.play("start_round")
+		GAME_STATE.DURING:
+			if player_current_guess == 5:
+				$Wheel/Ball.stop_rotating()
+				$Instructions2.visible = false
+				self.state = GAME_STATE.AFTER
+		GAME_STATE.AFTER:
+			#check arrary
+			_check_results()
+			print(player_seleted_pattern)
+			print(current_pattern)
+			if(player_seleted_pattern == current_pattern):
+				current_level += 1
+				print('match')
+				######state = GAME_STATE.BEFORE
+			else:
+				var _x = get_tree().change_scene("res://GameOver.tscn")
+			
+
+func _generate_new_pattern():
+	for n in 5:
+		current_pattern[n] = _get_random_number()
+
+func _start_ball():
+	$Wheel/Ball.start_rotating()
+
+func _stop_ball():
+	$Wheel/Ball.stop_rotating()
+
+func _get_random_number() -> int:
+	rng.randomize()
+	return rng.randi_range(0, 3)
+
+func _check_results():
+	for n in 5:
+		$Row.get_child(n).set_result_sprite(player_seleted_pattern[n] == current_pattern[n])
+		$Row.get_child(n).show_result()
 
 func _show_desired_pattern() -> void:
-	_setup_sprites()
+	_setup_sprites(current_pattern)
 	for n in $Row.get_children():
 		n.flip_over()
 
 func _hide_desired_pattern() -> void:
-	_setup_sprites()
+	#_setup_sprites()
 	for n in $Row.get_children():
 		n.squre_sprite.frame = 4
 
 
-func _setup_sprites() -> void:
-	square0.color = current_pattern[0]
-	square1.color = current_pattern[1]
-	square2.color = current_pattern[2]
-	square3.color = current_pattern[3]
-	square4.color = current_pattern[4]
+func _setup_sprites(pattern: Array) -> void:
+	square0.color = pattern[0]
+	square1.color = pattern[1]
+	square2.color = pattern[2]
+	square3.color = pattern[3]
+	square4.color = pattern[4]
 
 func _input(event):
-	if event.is_action_pressed("ui_accept"):
-		print('player guess:')
-		player_seleted_pattern[player_current_guess] = $Wheel/Ball.get_color()
-		print($Wheel/Ball.get_color())
-		print('actual color:')
-		print($Row.get_child(player_current_guess).color)
-		player_current_guess += 1
-		#_show_desired_pattern()
-	if event.is_action_pressed("ui_up"):
-		#print($Wheel/Ball.get_color())
-		_hide_desired_pattern()
-		$Wheel/Ball.toggle_ball_roating()
+	match(state):
+		GAME_STATE.DURING:
+			if event.is_action_pressed("ui_accept"):
+				player_seleted_pattern[player_current_guess] = $Wheel/Ball.get_color()
+				$Row.get_child(player_current_guess).color = player_seleted_pattern[player_current_guess]
+				$Row.get_child(player_current_guess).flip_over()
+				player_current_guess += 1
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == 'start_round':
+		self.state = GAME_STATE.DURING

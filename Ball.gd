@@ -21,6 +21,9 @@ func toggle_ball_roating() -> void:
 
 func stop_rotating():
 	is_rotating = false
+	
+func start_rotating():
+	is_rotating = true
 
 func rotate(delta):
 	if is_rotating:

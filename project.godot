@@ -11,6 +11,8 @@ config_version=4
 [application]
 
 config/name="regame"
+run/main_scene="res://SplashScreen.tscn"
+boot_splash/image="res://boot_image.png"
 config/icon="res://icon.png"
 
 [autoload]
@@ -48,6 +50,14 @@ texture={
 "size_limit": 0,
 "stream": false,
 "svg/scale": 1.0
+}
+
+[input]
+
+space={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
 }
 
 [physics]
