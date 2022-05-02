@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/memory_space_title.ogg-0ca791680b5dab92ad17f16d8d0918de.oggstr"
+
+[deps]
+
+source_file="res://sound/memory_space_title.ogg"
+dest_files=[ "res://.import/memory_space_title.ogg-0ca791680b5dab92ad17f16d8d0918de.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
