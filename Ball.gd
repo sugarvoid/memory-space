@@ -2,10 +2,13 @@ extends Sprite
 
 var current_color : int = 0
 var is_rotating: bool = false
+var rotate_speed: int = 350
 
 
 func get_color() -> int:
+	self.rotate_speed *= -1
 	return self.current_color
+	
 
 
 func _on_Area2D_area_entered(area) -> void:
@@ -30,4 +33,4 @@ func start_rotating() -> void:
 
 func rotate(delta) -> void:
 	if is_rotating:
-		self.rotation_degrees += 350 * delta
+		self.rotation_degrees += rotate_speed * delta
