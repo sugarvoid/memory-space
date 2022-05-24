@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://font/PICO-8 mono.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://script/MainScreen.gd" type="Script" id=2]
-[ext_resource path="res://image/pico-8-1x.png" type="Texture" id=3]
+[ext_resource path="res://image/title_bg.png" type="Texture" id=3]
+[ext_resource path="res://sound/memory_space_title.ogg" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=2]
 size = 8
@@ -33,26 +34,24 @@ tracks/0/keys = {
 script = ExtResource( 2 )
 
 [node name="Sprite2" type="Sprite" parent="."]
-position = Vector2( 130, 134 )
-scale = Vector2( 132, 135 )
+position = Vector2( 64, 64 )
 texture = ExtResource( 3 )
-region_enabled = true
 region_rect = Rect2( 0, 0, 1, 1 )
 
 [node name="Title" type="Label" parent="."]
-margin_left = 31.0
-margin_top = 28.0
-margin_right = 93.0
-margin_bottom = 61.0
+margin_left = 33.0
+margin_top = 27.0
+margin_right = 95.0
+margin_bottom = 60.0
 custom_fonts/font = SubResource( 2 )
 text = "Memory
 Space"
 align = 1
 
 [node name="Label" type="Label" parent="."]
-margin_left = 10.0
+margin_left = 12.0
 margin_top = 85.0
-margin_right = 114.0
+margin_right = 116.0
 margin_bottom = 99.0
 custom_fonts/font = SubResource( 3 )
 text = "PRESS [SPACE]"
@@ -60,3 +59,9 @@ align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/blink = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -80.0
+
+[node name="Tween" type="Tween" parent="."]

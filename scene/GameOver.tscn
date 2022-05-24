@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://font/PICO-8 mono.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://script/GameOver.gd" type="Script" id=2]
 [ext_resource path="res://image/pico-8-1x.png" type="Texture" id=3]
+[ext_resource path="res://sound/memory_space_gameover.ogg" type="AudioStream" id=4]
+[ext_resource path="res://image/game_over_top.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -45,16 +47,23 @@ text = "Press Space To
 Try Again"
 align = 1
 
-[node name="Label2" type="Label" parent="."]
-margin_left = 10.0
-margin_top = 38.0
-margin_right = 116.0
-margin_bottom = 74.0
-custom_fonts/font = SubResource( 1 )
-text = "Game Over
-
-"
-align = 1
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/blink = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Top" type="Sprite" parent="."]
+position = Vector2( 61, 35 )
+scale = Vector2( 2, 2 )
+z_index = 1
+texture = ExtResource( 6 )
+
+[node name="SquareSpawnPoint" type="Position2D" parent="."]
+position = Vector2( 64, -6 )
+
+[node name="TimerSquareSpawn" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="TimerSquareSpawn" to="." method="_on_TimerSquareSpawn_timeout"]
