@@ -70,8 +70,8 @@ tracks/2/keys = {
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 137, 161 )
-scale = Vector2( 171.5, 190.5 )
+position = Vector2( 638, 358 )
+scale = Vector2( 640, 360 )
 texture = ExtResource( 1 )
 hframes = 16
 frame = 13
@@ -87,22 +87,23 @@ region_rect = Rect2( 0, 0, 1, 1 )
 [node name="Row" type="Node2D" parent="."]
 
 [node name="Square0" parent="Row" instance=ExtResource( 5 )]
-position = Vector2( 29, 34 )
+position = Vector2( 200, 57 )
 
 [node name="Square1" parent="Row" instance=ExtResource( 5 )]
-position = Vector2( 45, 34 )
+position = Vector2( 249, 53 )
 
 [node name="Square2" parent="Row" instance=ExtResource( 5 )]
-position = Vector2( 61, 34 )
+position = Vector2( 299, 56 )
 
 [node name="Square3" parent="Row" instance=ExtResource( 5 )]
-position = Vector2( 77, 34 )
+position = Vector2( 346, 53 )
 
 [node name="Square4" parent="Row" instance=ExtResource( 5 )]
-position = Vector2( 93, 34 )
+position = Vector2( 395, 52 )
 
 [node name="Wheel" type="Sprite" parent="."]
-position = Vector2( 62.962, 88.378 )
+position = Vector2( 113, 184 )
+scale = Vector2( 3, 3 )
 texture = ExtResource( 4 )
 
 [node name="Green" parent="Wheel" instance=ExtResource( 7 )]
@@ -141,9 +142,9 @@ custom_fonts/font = ExtResource( 8 )
 
 [node name="Instructions" type="Label" parent="."]
 margin_left = 23.0
-margin_top = 45.0
-margin_right = 100.0
-margin_bottom = 53.0
+margin_top = 29.0
+margin_right = 104.0
+margin_bottom = 40.0
 custom_fonts/font = ExtResource( 8 )
 text = "Pay Attention"
 align = 1
