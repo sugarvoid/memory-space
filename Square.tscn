@@ -37,7 +37,7 @@ tracks/0/keys = {
 }
 
 [node name="Section" type="Node2D"]
-scale = Vector2( 3, 3 )
+scale = Vector2( 2.5, 2.5 )
 script = ExtResource( 4 )
 
 [node name="Result" type="Sprite" parent="."]

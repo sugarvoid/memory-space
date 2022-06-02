@@ -10,6 +10,11 @@ onready var square3 = get_node("Row/Square3")
 onready var square4 = get_node("Row/Square4")
 onready var square_container = get_node("Row")
 
+onready var pSquare = preload("res://Square.tscn")
+
+
+onready var starting_position: Position2D = get_node("SquareContainer/startingPos")
+
 
 enum GAME_STATE {
 	BEFORE_ROUND,
@@ -25,6 +30,12 @@ var desired_pattern : Array = [null, null, null, null, null]
 var player_seleted_pattern : Array = [null, null, null, null, null]
 var player_current_guess: int
 
+var square_pos: Array = [
+	
+]
+
+
+
 
 func _ready():
 	current_level = 1
@@ -33,6 +44,8 @@ func _ready():
 
 func _process(_delta):
 	_update_level_label()
+	if Input.is_action_pressed("ui_cancel"):
+		get_tree().quit()
 	
 	match(state):
 		GAME_STATE.BEFORE_ROUND:
@@ -52,13 +65,28 @@ func _process(_delta):
 func _update_level_label() -> void:
 	$LblLevel.text = level_string % str(current_level)
 
+func _spawnSquarePositions() -> void:
+	for l in 20:
+		var tempPos: Vector2 = Vector2(starting_position.x + 40, starting_position.y)
+		self.square_pos.append(tempPos)
+
+
+func _spawnSquare(pos: Vector2) -> void:
+	for l in current_level:
+		var new_square = pSquare.instance()
+		new_square.position = square_pos[current_level - 1]
+		get_tree().current_scene.add_child(new_square)
+
+func _resizeArrays(current_level: int):
+	self.desired_pattern.resize(current_level)
+	self.player_seleted_pattern.resize(current_level)
 
 func _reset_player_guess() -> void:
 	player_current_guess = 0
 
 
 func _generate_new_pattern() -> void:
-	for n in 5:
+	for n in self.current_level:
 		desired_pattern[n] = _get_random_number()
 
 
@@ -115,7 +143,7 @@ func _on_AnimationPlayer_animation_finished(anim_name) -> void:
 		self.state = GAME_STATE.DURING
 
 
-func _start_new_round() -> void:
+func _start_new_level() -> void:
 	is_round_over = false
 	player_current_guess = 0
 	_generate_new_pattern()
@@ -129,6 +157,6 @@ func _on_PostRoundTimer_timeout() -> void:
 	
 	if(player_seleted_pattern == desired_pattern):
 		current_level += 1
-		_start_new_round()
+		_start_new_level()
 	else:
 		var _x = get_tree().change_scene("res://scene/GameOver.tscn")

@@ -69,7 +69,19 @@ tracks/2/keys = {
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
 
+[node name="SquareContainer" type="Node2D" parent="."]
+
+[node name="three" type="Position2D" parent="SquareContainer"]
+position = Vector2( 327, 222 )
+
+[node name="three2" type="Position2D" parent="SquareContainer"]
+position = Vector2( 315, 99 )
+
+[node name="startingPos" type="Position2D" parent="SquareContainer"]
+position = Vector2( 275, 98 )
+
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 638, 358 )
 scale = Vector2( 640, 360 )
 texture = ExtResource( 1 )
@@ -90,10 +102,10 @@ region_rect = Rect2( 0, 0, 1, 1 )
 position = Vector2( 200, 57 )
 
 [node name="Square1" parent="Row" instance=ExtResource( 5 )]
-position = Vector2( 249, 53 )
+position = Vector2( 273, 57 )
 
 [node name="Square2" parent="Row" instance=ExtResource( 5 )]
-position = Vector2( 299, 56 )
+position = Vector2( 314, 56 )
 
 [node name="Square3" parent="Row" instance=ExtResource( 5 )]
 position = Vector2( 346, 53 )
@@ -141,10 +153,10 @@ margin_bottom = 7.0
 custom_fonts/font = ExtResource( 8 )
 
 [node name="Instructions" type="Label" parent="."]
-margin_left = 23.0
-margin_top = 29.0
-margin_right = 104.0
-margin_bottom = 40.0
+margin_left = 30.0
+margin_top = 18.0
+margin_right = 111.0
+margin_bottom = 29.0
 custom_fonts/font = ExtResource( 8 )
 text = "Pay Attention"
 align = 1

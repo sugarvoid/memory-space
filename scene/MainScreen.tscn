@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://font/PICO-8 mono.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://script/MainScreen.gd" type="Script" id=2]
 [ext_resource path="res://image/title_bg.png" type="Texture" id=3]
 [ext_resource path="res://sound/memory_space_title.ogg" type="AudioStream" id=4]
+[ext_resource path="res://image/boot_image.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=2]
 size = 8
@@ -18,7 +19,7 @@ resource_name = "blink"
 length = 1.517
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Label:visible")
+tracks/0/path = NodePath("Sprite2/Label:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -31,28 +32,38 @@ tracks/0/keys = {
 }
 
 [node name="MainScreen" type="Node2D"]
+position = Vector2( 164, 15 )
+scale = Vector2( 2.5, 2.5 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 61.6, 65.6 )
+scale = Vector2( 134, 77.2 )
+texture = ExtResource( 5 )
 
 [node name="Sprite2" type="Sprite" parent="."]
 position = Vector2( 64, 64 )
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 1, 1 )
 
-[node name="Title" type="Label" parent="."]
-margin_left = 33.0
-margin_top = 27.0
-margin_right = 95.0
-margin_bottom = 60.0
+[node name="Title" type="Label" parent="Sprite2"]
+margin_left = -31.0
+margin_top = -37.0
+margin_right = 31.0
+margin_bottom = -4.0
 custom_fonts/font = SubResource( 2 )
 text = "Memory
 Space"
 align = 1
 
-[node name="Label" type="Label" parent="."]
-margin_left = 12.0
-margin_top = 85.0
-margin_right = 116.0
-margin_bottom = 99.0
+[node name="Label" type="Label" parent="Sprite2"]
+margin_left = -52.0
+margin_top = 21.0
+margin_right = 52.0
+margin_bottom = 35.0
 custom_fonts/font = SubResource( 3 )
 text = "PRESS [SPACE]"
 align = 1
