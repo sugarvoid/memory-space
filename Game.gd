@@ -29,37 +29,27 @@ var w_space: int
 const row_one_y = 55
 const row_two_y = 95
 
-var buttface: Array
 
-var square_pos: Array = [
-	Vector2(250, 55),
-	Vector2(290, 55),
-	Vector2(330, 55),
-	Vector2(370, 55),
-	Vector2(410, 55),
-	Vector2(450, 55),
-	Vector2(490, 55),
-	Vector2(530, 55),
-	Vector2(570, 55),
-	Vector2(610, 55),
-	Vector2(650, 55),
-	#
-	#
-	#
-]
+var square_pos: Array
 
 
 func _ready():
-	current_level = 50
+	current_level = 1
 	
 	_fill_in_postions()
 	
 	rng = RandomNumberGenerator.new()
 	
-	for l in current_level:
-		print(l)
-		_spawnSquare(buttface[l])
+	_add_squares()
 
+
+func _add_squares():
+	
+	for c in square_container.get_children():
+		c.queue_free()
+	
+	for l in current_level:
+		_spawnSquare(square_pos[l])
 
 func _process(_delta):
 	
@@ -91,22 +81,36 @@ func _update_level_label() -> void:
 ## Might add a fucntion to make positions in code
 func _fill_in_postions() -> void:
 	var y_value = starting_position.y
-	for l in 100:
-		var tempPos: Vector2 = Vector2(starting_position.x + (40 * l), starting_position.y)
-		if l == 10:
-			y_value = y_value + 40
-		if l == 20:
-			y_value = y_value + 40
-		if l == 30:
-			y_value = y_value + 40
-		if l == 40:
-			y_value = y_value + 40
-		if l == 50:
-			y_value = y_value + 40
-		
-		self.buttface.append(tempPos)
+	var x_value = starting_position.x
 	
-	print(self.buttface)
+	for l in 100:
+		
+		if l == 10:
+			y_value = y_value + 70
+			x_value = starting_position.x
+		if l == 20:
+			y_value = y_value + 70
+			x_value = starting_position.x
+			#x_value = x_value + 40
+		if l == 30:
+			y_value = y_value + 70
+			x_value = starting_position.x
+			#x_value = x_value + 40
+		if l == 40:
+			y_value = y_value + 70
+			x_value = starting_position.x
+			#x_value = x_value + 40
+		if l == 50:
+			y_value = y_value + 70
+			x_value = starting_position.x
+			#x_value = x_value + 40
+		
+		x_value += 40
+		var tempPos: Vector2 = Vector2(x_value, y_value)
+		
+		self.square_pos.append(tempPos)
+	
+
 
 
 func _spawnSquare(pos: Vector2) -> void:
@@ -142,9 +146,12 @@ func _get_random_number() -> int:
 
 
 func _check_results() -> void:
-	for n in 5:
+	for n in self.current_level:
 		square_container.get_child(n).set_result_sprite(player_seleted_pattern[n] == desired_pattern[n])
 		square_container.get_child(n).show_result()
+	
+	print(desired_pattern)
+	print(player_seleted_pattern)
 
 
 func _show_desired_pattern() -> void:
@@ -160,9 +167,9 @@ func _hide_desired_pattern() -> void:
 
 
 func _setup_sprites(pattern: Array) -> void:
-	$SquareContainer.get_child(0)
-	$SquareContainer.get_child(1)
-	$SquareContainer.get_child(2)
+	for c in $SquareContainer.get_children():
+		c.color = desired_pattern[c.get_index()]
+
 	
 
 func _input(event) -> void:
@@ -182,8 +189,10 @@ func _on_AnimationPlayer_animation_finished(anim_name) -> void:
 
 func _start_new_level() -> void:
 	is_round_over = false
+	
 	player_current_guess = 0
 	_generate_new_pattern()
+	_add_squares()
 	state = GAME_STATE.BEFORE_ROUND
 
 
