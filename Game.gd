@@ -3,17 +3,12 @@ extends Node2D
 
 const level_string = "Level: %s"
 
-onready var square0 = get_node("Row/Square0")
-onready var square1 = get_node("Row/Square1")
-onready var square2 = get_node("Row/Square2")
-onready var square3 = get_node("Row/Square3")
-onready var square4 = get_node("Row/Square4")
-onready var square_container = get_node("Row")
+onready var square_container = get_node("SquareContainer")
 
-onready var pSquare = preload("res://Square.tscn")
+onready var pSquare = preload("res://Section.tscn")
 
 
-onready var starting_position: Position2D = get_node("SquareContainer/startingPos")
+onready var starting_position: Vector2 = get_node("StartingPos").position
 
 
 enum GAME_STATE {
@@ -26,23 +21,50 @@ var rng :RandomNumberGenerator
 var current_level: int
 var is_round_over: bool = false
 var state = GAME_STATE.BEFORE_ROUND
-var desired_pattern : Array = [null, null, null, null, null]
-var player_seleted_pattern : Array = [null, null, null, null, null]
+var desired_pattern : Array
+var player_seleted_pattern : Array
 var player_current_guess: int
+var w_space: int 
+
+const row_one_y = 55
+const row_two_y = 95
+
+var buttface: Array
 
 var square_pos: Array = [
-	
+	Vector2(250, 55),
+	Vector2(290, 55),
+	Vector2(330, 55),
+	Vector2(370, 55),
+	Vector2(410, 55),
+	Vector2(450, 55),
+	Vector2(490, 55),
+	Vector2(530, 55),
+	Vector2(570, 55),
+	Vector2(610, 55),
+	Vector2(650, 55),
+	#
+	#
+	#
 ]
 
 
-
-
 func _ready():
-	current_level = 1
+	current_level = 50
+	
+	_fill_in_postions()
+	
 	rng = RandomNumberGenerator.new()
+	
+	for l in current_level:
+		print(l)
+		_spawnSquare(buttface[l])
 
 
 func _process(_delta):
+	
+	
+	
 	_update_level_label()
 	if Input.is_action_pressed("ui_cancel"):
 		get_tree().quit()
@@ -51,7 +73,7 @@ func _process(_delta):
 		GAME_STATE.BEFORE_ROUND:
 			$AnimationPlayer.play("start_round")
 		GAME_STATE.DURING:
-			if player_current_guess == 5:
+			if player_current_guess == self.current_level:
 				$Wheel/Ball.stop_rotating()
 				$Instructions2.visible = false
 				self.state = GAME_STATE.POST_ROUND
@@ -65,27 +87,43 @@ func _process(_delta):
 func _update_level_label() -> void:
 	$LblLevel.text = level_string % str(current_level)
 
-func _spawnSquarePositions() -> void:
-	for l in 20:
-		var tempPos: Vector2 = Vector2(starting_position.x + 40, starting_position.y)
-		self.square_pos.append(tempPos)
+
+## Might add a fucntion to make positions in code
+func _fill_in_postions() -> void:
+	var y_value = starting_position.y
+	for l in 100:
+		var tempPos: Vector2 = Vector2(starting_position.x + (40 * l), starting_position.y)
+		if l == 10:
+			y_value = y_value + 40
+		if l == 20:
+			y_value = y_value + 40
+		if l == 30:
+			y_value = y_value + 40
+		if l == 40:
+			y_value = y_value + 40
+		if l == 50:
+			y_value = y_value + 40
+		
+		self.buttface.append(tempPos)
+	
+	print(self.buttface)
 
 
 func _spawnSquare(pos: Vector2) -> void:
-	for l in current_level:
-		var new_square = pSquare.instance()
-		new_square.position = square_pos[current_level - 1]
-		get_tree().current_scene.add_child(new_square)
+	var new_square = pSquare.instance()
+	new_square.position = pos
+	$SquareContainer.add_child(new_square)
 
-func _resizeArrays(current_level: int):
-	self.desired_pattern.resize(current_level)
-	self.player_seleted_pattern.resize(current_level)
+func _resizeArrays(cur_lvl: int):
+	self.desired_pattern.resize(cur_lvl)
+	self.player_seleted_pattern.resize(cur_lvl)
 
 func _reset_player_guess() -> void:
 	player_current_guess = 0
 
 
 func _generate_new_pattern() -> void:
+	_resizeArrays(self.current_level)
 	for n in self.current_level:
 		desired_pattern[n] = _get_random_number()
 
@@ -122,11 +160,10 @@ func _hide_desired_pattern() -> void:
 
 
 func _setup_sprites(pattern: Array) -> void:
-	square0.color = pattern[0]
-	square1.color = pattern[1]
-	square2.color = pattern[2]
-	square3.color = pattern[3]
-	square4.color = pattern[4]
+	$SquareContainer.get_child(0)
+	$SquareContainer.get_child(1)
+	$SquareContainer.get_child(2)
+	
 
 func _input(event) -> void:
 	match(state):
