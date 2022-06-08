@@ -4,7 +4,7 @@ var color : int
 var is_flipped_over : bool
 
 onready var squre_sprite : Sprite = $Square
-onready var result_sprite: Sprite = get_node("Result")
+onready var guess_sprite: Sprite = get_node("PlayerGuess")
 
 func _match_color_to_sprite() -> void:
 	match(self.color):
@@ -18,19 +18,17 @@ func _match_color_to_sprite() -> void:
 			squre_sprite.frame = 3
 
 
-func set_result_sprite(correct: bool) -> void:
-	if correct:
-		result_sprite.frame = 0
-	else:
-		result_sprite.frame = 1
+
+func set_guess_sprite(color: int) -> void:
+	guess_sprite.frame = color
 
 
-func show_result() -> void:
-	result_sprite.visible = true
+func show_player_guess() -> void:
+	guess_sprite.visible = true
 
 
-func hide_result() -> void:
-	result_sprite.visible = false
+func hide_player_guess() -> void:
+	guess_sprite.visible = false
 
 
 func _ready() -> void:
@@ -38,7 +36,7 @@ func _ready() -> void:
 
 
 func _reset_section() -> void:
-	self.result_sprite.visible = false
+	self.guess_sprite.visible = false
 	self.squre_sprite.frame = 4
 
 

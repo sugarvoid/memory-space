@@ -147,8 +147,9 @@ func _get_random_number() -> int:
 
 func _check_results() -> void:
 	for n in self.current_level:
-		square_container.get_child(n).set_result_sprite(player_seleted_pattern[n] == desired_pattern[n])
-		square_container.get_child(n).show_result()
+		pass
+		#square_container.get_child(n).set_result_sprite(player_seleted_pattern[n] == desired_pattern[n])
+		#square_container.get_child(n).show_result()
 	
 	print(desired_pattern)
 	print(player_seleted_pattern)
@@ -177,6 +178,8 @@ func _input(event) -> void:
 		GAME_STATE.DURING:
 			if event.is_action_pressed("ui_accept"):
 				player_seleted_pattern[player_current_guess] = $Wheel/Ball.get_color()
+				square_container.get_child(player_current_guess).set_guess_sprite(player_seleted_pattern[player_current_guess])
+				square_container.get_child(player_current_guess).show_player_guess()
 				square_container.get_child(player_current_guess).color = player_seleted_pattern[player_current_guess]
 				square_container.get_child(player_current_guess).flip_over()
 				player_current_guess += 1
@@ -198,7 +201,7 @@ func _start_new_level() -> void:
 
 func _on_PostRoundTimer_timeout() -> void:
 	for n in square_container.get_children():
-		n.hide_result()
+		n.hide_player_guess()
 		n.squre_sprite.frame = 4
 	
 	if(player_seleted_pattern == desired_pattern):
