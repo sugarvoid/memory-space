@@ -62,7 +62,7 @@ func _ready():
 	
 	rng = RandomNumberGenerator.new()
 	
-	_add_squares()
+	_start_new_level()
 
 
 func _add_squares():
@@ -104,7 +104,7 @@ func _update_level_label() -> void:
 	$LblLevel.text = level_string % str(current_level)
 
 func _compare_squares() -> void:
-	print(square_container.get_children())
+	#print(square_container.get_children())
 	for c in square_container.get_children():
 		c.flip_over()
 		yield(get_tree().create_timer(1), "timeout")
@@ -151,6 +151,8 @@ func _spawnSquare(pos: Vector2) -> void:
 	$SquareContainer.add_child(new_square)
 
 func _resizeArrays(cur_lvl: int):
+	self.desired_pattern.clear()
+	self.player_seleted_pattern.clear()
 	self.desired_pattern.resize(cur_lvl)
 	self.player_seleted_pattern.resize(cur_lvl)
 
@@ -187,7 +189,6 @@ func _check_results() -> void:
 	for i in desired_pattern:
 		print(_int_to_color(i))
 
-	print(player_seleted_pattern)
 
 
 func _show_desired_pattern() -> void:
@@ -228,17 +229,18 @@ func _on_AnimationPlayer_animation_finished(anim_name) -> void:
 
 func _start_new_level() -> void:
 	is_round_over = false
-	
 	player_current_guess = 0
+	
 	match(game_mode):
 		GAME_MODE.EASY:
 			_resizeArrays(self.current_level)
-			for e in desired_pattern.size():
-				desired_pattern[e] = Global.EASY_MODE_PATTERN[e]
+			desired_pattern = Global.EASY_MODE_PATTERN.slice(0, (current_level - 1) )
+			print(desired_pattern)
 		GAME_MODE.NORMAL:
 			pass
 		GAME_MODE.HARD:
 			_generate_new_pattern()
+
 	_add_squares()
 	state = GAME_STATE.BEFORE_ROUND
 
