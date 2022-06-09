@@ -1,13 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://font/PICO-8 mono.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://font/m6x11_16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://script/SplashScreen.gd" type="Script" id=2]
 [ext_resource path="res://image/pico-8-1x.png" type="Texture" id=3]
 [ext_resource path="res://sound/kitargo_logo.wav" type="AudioStream" id=4]
-
-[sub_resource type="DynamicFont" id=2]
-size = 8
-font_data = ExtResource( 1 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "rise_up"
@@ -29,19 +25,19 @@ tracks/0/keys = {
 script = ExtResource( 2 )
 
 [node name="Sprite2" type="Sprite" parent="."]
-position = Vector2( 130, 134 )
-scale = Vector2( 132, 135 )
+position = Vector2( 652, 376 )
+scale = Vector2( 654, 377 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1, 1 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 30.0
-margin_top = 135.0
-margin_right = 98.0
-margin_bottom = 160.0
+margin_left = 275.0
+margin_top = 143.0
+margin_right = 381.0
+margin_bottom = 190.0
 custom_colors/font_color = Color( 1, 0.92549, 0.152941, 1 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 text = "Kitargo
 Games"
 align = 1

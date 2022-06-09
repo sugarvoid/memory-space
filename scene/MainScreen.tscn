@@ -1,18 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://font/PICO-8 mono.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://font/m6x11_16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://script/MainScreen.gd" type="Script" id=2]
 [ext_resource path="res://image/title_bg.png" type="Texture" id=3]
 [ext_resource path="res://sound/memory_space_title.ogg" type="AudioStream" id=4]
 [ext_resource path="res://image/boot_image.png" type="Texture" id=5]
-
-[sub_resource type="DynamicFont" id=2]
-size = 8
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 4
-font_data = ExtResource( 1 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "blink"
@@ -54,17 +46,18 @@ margin_left = -31.0
 margin_top = -37.0
 margin_right = 31.0
 margin_bottom = -4.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 text = "Memory
 Space"
 align = 1
 
 [node name="Label" type="Label" parent="Sprite2"]
-margin_left = -52.0
-margin_top = 21.0
-margin_right = 52.0
-margin_bottom = 35.0
-custom_fonts/font = SubResource( 3 )
+margin_left = -25.745
+margin_top = 20.977
+margin_right = 78.255
+margin_bottom = 34.977
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 1 )
 text = "PRESS [SPACE]"
 align = 1
 
