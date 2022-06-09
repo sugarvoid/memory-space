@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Section",
+"language": "GDScript",
+"path": "res://Section.gd"
+} ]
+_global_script_class_icons={
+"Section": ""
+}
+
 [application]
 
 config/name="Memory Space"

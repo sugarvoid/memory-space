@@ -1,4 +1,5 @@
 extends Node2D
+class_name Section
 
 var color : int 
 var is_flipped_over : bool

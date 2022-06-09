@@ -11,3 +11,4 @@ func _ready() -> void:
 func _input(event) -> void:
 	if (event.is_action_released("space")):
 		var _x = get_tree().change_scene("res://Game.tscn")
+		#set game mode

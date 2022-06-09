@@ -1,0 +1,5 @@
+have a fixed pattern 
+add an x to wrong squres 
+
+speed up flipping anaimation after 10
+have a way to skip them all 
