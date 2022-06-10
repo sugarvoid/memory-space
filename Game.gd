@@ -1,14 +1,14 @@
 extends Node2D
 
 
-const level_string = "Level: %s"
-
 onready var square_container = get_node("SquareContainer")
-
 onready var pSquare = preload("res://Section.tscn")
-
-
 onready var starting_position: Vector2 = get_node("StartingPos").position
+
+
+const level_string = "Level: %s"
+const row_one_y = 55
+const row_two_y = 95
 
 
 enum GAME_STATE {
@@ -28,21 +28,15 @@ var rng :RandomNumberGenerator
 var current_level: int
 var is_level_over: bool = false
 var state = GAME_STATE.BEFORE_ROUND
-var game_mode = GAME_MODE.EASY
+var game_mode = GAME_MODE.NORMAL
 var desired_pattern : Array
 var player_seleted_pattern : Array
 var player_current_guess: int
 var w_space: int 
 var done_checking: bool = false
-
-
-
-
-const row_one_y = 55
-const row_two_y = 95
-
-
+var NORMAL_MODE_PATTERN: Array = []
 var square_pos: Array
+
 
 
 func _int_to_color(number: int) -> String:
@@ -54,33 +48,30 @@ func _int_to_color(number: int) -> String:
 	]
 	return strings[number]
 
+
 func _ready():
 	current_level = 1
-	
+	rng = RandomNumberGenerator.new()
 	_fill_in_postions()
 	
+	
+	if game_mode == GAME_MODE.NORMAL:
+		NORMAL_MODE_PATTERN.resize(50)
+		_create_normal_pattern()
+		
 	_start_new_level()
-	
-	
 
-	
-	rng = RandomNumberGenerator.new()
-	
-	
 
 
 func _add_squares():
-	
 	for c in square_container.get_children():
 		c.queue_free()
 	
 	for l in current_level:
 		_spawnSquare(square_pos[l])
 
-func _process(_delta):
-	
 
-	
+func _process(_delta):
 	_update_level_label()
 	if Input.is_action_pressed("ui_cancel"):
 		get_tree().quit()
@@ -104,8 +95,14 @@ func _process(_delta):
 				done_checking = false
 
 
+func _create_normal_pattern() -> void:
+	for i in 50:
+		NORMAL_MODE_PATTERN[i] = _get_random_number()
+
+
 func _update_level_label() -> void:
 	$LblLevel.text = level_string % str(current_level)
+
 
 func _compare_squares() -> void:
 	#print(square_container.get_children())
@@ -148,28 +145,30 @@ func _fill_in_postions() -> void:
 	
 
 
-
 func _spawnSquare(pos: Vector2) -> void:
 	var new_square = pSquare.instance()
 	new_square.position = pos
 	$SquareContainer.add_child(new_square)
 
+
 func _resizeArrays(cur_lvl: int):
-	pass
-	#self.desired_pattern.clear()
 	self.player_seleted_pattern.clear()
-	#self.desired_pattern.resize(cur_lvl)
 	self.player_seleted_pattern.resize(cur_lvl)
+
 
 func _reset_player_guess() -> void:
 	player_current_guess = 0
 
 
-func _generate_new_pattern() -> void:
-	print(game_mode)
-	_resizeArrays(self.current_level)
-	for n in self.current_level:
-		desired_pattern[n] = _get_random_number()
+func _generate_level_pattern() -> void:
+	match(game_mode):
+		GAME_MODE.EASY:
+			desired_pattern = Global.EASY_MODE_PATTERN.slice(0, (current_level - 1) )
+		GAME_MODE.NORMAL:
+			desired_pattern = NORMAL_MODE_PATTERN.slice(0, (current_level - 1) )
+		GAME_MODE.HARD:
+			for n in self.current_level:
+				desired_pattern[n] = _get_random_number()
 
 
 func _start_ball() -> void:
@@ -190,10 +189,6 @@ func _check_results() -> void:
 		pass
 		#square_container.get_child(n).set_result_sprite(player_seleted_pattern[n] == desired_pattern[n])
 		#square_container.get_child(n).show_result()
-	
-	print('desired pattern')
-	for i in desired_pattern:
-		print(_int_to_color(i))
 
 
 
@@ -238,15 +233,9 @@ func _start_new_level() -> void:
 	is_level_over = false
 	player_current_guess = 0
 	
-	match(game_mode):
-		GAME_MODE.EASY:
-			_resizeArrays(self.current_level)
-			desired_pattern = Global.EASY_MODE_PATTERN.slice(0, (current_level - 1) )
-			print(desired_pattern)
-		GAME_MODE.NORMAL:
-			pass
-		GAME_MODE.HARD:
-			_generate_new_pattern()
+	_resizeArrays(self.current_level)
+	
+	_generate_level_pattern()
 
 	_add_squares()
 	state = GAME_STATE.BEFORE_ROUND
