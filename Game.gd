@@ -79,7 +79,7 @@ func _add_squares():
 
 func _process(_delta):
 	
-	
+
 	
 	_update_level_label()
 	if Input.is_action_pressed("ui_cancel"):
@@ -155,9 +155,10 @@ func _spawnSquare(pos: Vector2) -> void:
 	$SquareContainer.add_child(new_square)
 
 func _resizeArrays(cur_lvl: int):
+	pass
 	#self.desired_pattern.clear()
-	#self.player_seleted_pattern.clear()
-	self.desired_pattern.resize(cur_lvl)
+	self.player_seleted_pattern.clear()
+	#self.desired_pattern.resize(cur_lvl)
 	self.player_seleted_pattern.resize(cur_lvl)
 
 func _reset_player_guess() -> void:
@@ -165,6 +166,7 @@ func _reset_player_guess() -> void:
 
 
 func _generate_new_pattern() -> void:
+	print(game_mode)
 	_resizeArrays(self.current_level)
 	for n in self.current_level:
 		desired_pattern[n] = _get_random_number()
