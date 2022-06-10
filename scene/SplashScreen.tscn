@@ -18,7 +18,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 30, 135 ), Vector2( 30, 55 ) ]
+"values": [ Vector2( 230, 380 ), Vector2( 230, 150 ) ]
 }
 
 [node name="SplashScreen" type="Node2D"]
@@ -32,10 +32,11 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1, 1 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 275.0
-margin_top = 143.0
-margin_right = 381.0
-margin_bottom = 190.0
+margin_left = 230.0
+margin_top = 380.0
+margin_right = 336.0
+margin_bottom = 427.0
+rect_scale = Vector2( 2, 2 )
 custom_colors/font_color = Color( 1, 0.92549, 0.152941, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "Kitargo

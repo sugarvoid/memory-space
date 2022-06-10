@@ -10,7 +10,7 @@ func _ready():
 	$Sprite.frame = frames[rand_int]
 
 func _process(delta):
-	self.global_position.y += 13 * delta
+	self.global_position.y += 15 * delta
 
 
 func _on_VisibilityNotifier2D_screen_exited():

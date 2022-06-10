@@ -22,7 +22,6 @@ _global_script_class_icons={
 
 config/name="Memory Space"
 run/main_scene="res://scene/SplashScreen.tscn"
-boot_splash/image="res://image/boot_image.png"
 config/icon="res://icon.png"
 
 [autoload]

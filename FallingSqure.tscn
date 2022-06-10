@@ -4,6 +4,7 @@
 [ext_resource path="res://scene/FallingSquare.gd" type="Script" id=2]
 
 [node name="FallingSquare" type="Node2D"]
+scale = Vector2( 14.111, 2.323 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

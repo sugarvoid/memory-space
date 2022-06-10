@@ -15,5 +15,6 @@ func _input(event) -> void:
 
 func _on_TimerSquareSpawn_timeout():
 	var square = p_square.instance()
+
 	square.position = $SquareSpawnPoint.position
 	get_tree().current_scene.call_deferred("add_child", square)

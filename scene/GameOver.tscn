@@ -1,14 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://font/PICO-8 mono.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://font/m6x11_16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://script/GameOver.gd" type="Script" id=2]
 [ext_resource path="res://image/pico-8-1x.png" type="Texture" id=3]
 [ext_resource path="res://sound/memory_space_gameover.ogg" type="AudioStream" id=4]
-[ext_resource path="res://image/game_over_top.png" type="Texture" id=6]
-
-[sub_resource type="DynamicFont" id=1]
-size = 8
-font_data = ExtResource( 1 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "blink"
@@ -38,13 +33,34 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1, 1 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 266.0
-margin_top = 170.0
-margin_right = 421.0
-margin_bottom = 193.0
-custom_fonts/font = SubResource( 1 )
+margin_left = 167.0
+margin_top = 258.0
+margin_right = 322.0
+margin_bottom = 289.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 1 )
 text = "Press Space To 
 Try Again"
+align = 1
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 168.0
+margin_top = 82.0
+margin_right = 323.0
+margin_bottom = 113.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 1 )
+text = "Game Over"
+align = 1
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 167.0
+margin_top = 172.0
+margin_right = 322.0
+margin_bottom = 203.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 1 )
+text = "You made it to level 5"
 align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -53,17 +69,11 @@ anims/blink = SubResource( 2 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 
-[node name="Top" type="Sprite" parent="."]
-position = Vector2( 347, 57 )
-scale = Vector2( 2, 2 )
-z_index = 1
-texture = ExtResource( 6 )
-
 [node name="SquareSpawnPoint" type="Position2D" parent="."]
-position = Vector2( 64, -6 )
+position = Vector2( 64, -27 )
 
 [node name="TimerSquareSpawn" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 1.5
 autostart = true
 
 [connection signal="timeout" from="TimerSquareSpawn" to="." method="_on_TimerSquareSpawn_timeout"]
