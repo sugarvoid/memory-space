@@ -26,7 +26,7 @@ enum GAME_MODE {
 
 var rng :RandomNumberGenerator
 var current_level: int
-var is_round_over: bool = false
+var is_level_over: bool = false
 var state = GAME_STATE.BEFORE_ROUND
 var game_mode = GAME_MODE.EASY
 var desired_pattern : Array
@@ -57,12 +57,16 @@ func _int_to_color(number: int) -> String:
 func _ready():
 	current_level = 1
 	
-	
 	_fill_in_postions()
+	
+	_start_new_level()
+	
+	
+
 	
 	rng = RandomNumberGenerator.new()
 	
-	_start_new_level()
+	
 
 
 func _add_squares():
@@ -93,10 +97,10 @@ func _process(_delta):
 			_compare_squares()
 			self.state = GAME_STATE.POST_ROUND
 		GAME_STATE.POST_ROUND:
-			if !is_round_over and done_checking:
+			if !is_level_over and done_checking:
 				_check_results()
 				$PostRoundTimer.start(4)
-				is_round_over = true
+				is_level_over = true
 				done_checking = false
 
 
@@ -151,8 +155,8 @@ func _spawnSquare(pos: Vector2) -> void:
 	$SquareContainer.add_child(new_square)
 
 func _resizeArrays(cur_lvl: int):
-	self.desired_pattern.clear()
-	self.player_seleted_pattern.clear()
+	#self.desired_pattern.clear()
+	#self.player_seleted_pattern.clear()
 	self.desired_pattern.resize(cur_lvl)
 	self.player_seleted_pattern.resize(cur_lvl)
 
@@ -204,9 +208,9 @@ func _hide_desired_pattern() -> void:
 
 
 func _setup_sprites(pattern: Array) -> void:
-	for c in $SquareContainer.get_children():
-		c.color = desired_pattern[c.get_index()]
 
+	for c in $SquareContainer.get_children():
+		c.color = pattern[c.get_index()]
 	
 
 func _input(event) -> void:
@@ -228,7 +232,8 @@ func _on_AnimationPlayer_animation_finished(anim_name) -> void:
 
 
 func _start_new_level() -> void:
-	is_round_over = false
+	print('hello')
+	is_level_over = false
 	player_current_guess = 0
 	
 	match(game_mode):
