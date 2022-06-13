@@ -7,6 +7,8 @@ enum COLORS {
 	GREEN
 }
 
+const path_to_main_menu: String = "res://scene/MainScreen.tscn"
+
 const COLORS_2 : Dictionary = {
 	0: "Blue",
 	1: "Yellow",
