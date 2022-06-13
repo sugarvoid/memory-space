@@ -25,7 +25,6 @@ enum GAME_MODE {
 }
 
 var rng :RandomNumberGenerator
-var current_level: int
 var is_level_over: bool = false
 var state = GAME_STATE.BEFORE_ROUND
 var game_mode = GAME_MODE.NORMAL
@@ -50,7 +49,7 @@ func _int_to_color(number: int) -> String:
 
 
 func _ready():
-	current_level = 1
+	Global.current_level = 1
 	rng = RandomNumberGenerator.new()
 	_fill_in_postions()
 	
@@ -67,7 +66,7 @@ func _add_squares():
 	for c in square_container.get_children():
 		c.queue_free()
 	
-	for l in current_level:
+	for l in Global.current_level:
 		_spawnSquare(square_pos[l])
 
 
@@ -80,7 +79,7 @@ func _process(_delta):
 		GAME_STATE.BEFORE_ROUND:
 			$AnimationPlayer.play("start_round")
 		GAME_STATE.DURING:
-			if player_current_guess == self.current_level:
+			if player_current_guess == Global.current_level:
 				$Wheel/Ball.stop_rotating()
 				$Instructions2.visible = false
 				self.state = GAME_STATE.CHECKING
@@ -101,7 +100,7 @@ func _create_normal_pattern() -> void:
 
 
 func _update_level_label() -> void:
-	$LblLevel.text = level_string % str(current_level)
+	$LblLevel.text = level_string % str(Global.current_level)
 
 
 func _compare_squares() -> void:
@@ -163,11 +162,11 @@ func _reset_player_guess() -> void:
 func _generate_level_pattern() -> void:
 	match(game_mode):
 		GAME_MODE.EASY:
-			desired_pattern = Global.EASY_MODE_PATTERN.slice(0, (current_level - 1) )
+			desired_pattern = Global.EASY_MODE_PATTERN.slice(0, (Global.current_level - 1) )
 		GAME_MODE.NORMAL:
-			desired_pattern = NORMAL_MODE_PATTERN.slice(0, (current_level - 1) )
+			desired_pattern = NORMAL_MODE_PATTERN.slice(0, (Global.current_level - 1) )
 		GAME_MODE.HARD:
-			for n in self.current_level:
+			for n in Global.current_level:
 				desired_pattern[n] = _get_random_number()
 
 
@@ -185,7 +184,7 @@ func _get_random_number() -> int:
 
 
 func _check_results() -> void:
-	for n in self.current_level:
+	for n in Global.current_level:
 		pass
 		#square_container.get_child(n).set_result_sprite(player_seleted_pattern[n] == desired_pattern[n])
 		#square_container.get_child(n).show_result()
@@ -233,7 +232,7 @@ func _start_new_level() -> void:
 	is_level_over = false
 	player_current_guess = 0
 	
-	_resizeArrays(self.current_level)
+	_resizeArrays(Global.current_level)
 	
 	_generate_level_pattern()
 
@@ -247,7 +246,7 @@ func _on_PostRoundTimer_timeout() -> void:
 		n.squre_sprite.frame = 4
 	
 	if(player_seleted_pattern == desired_pattern):
-		current_level += 1
+		Global.current_level += 1
 		_start_new_level()
 	else:
 		var _x = get_tree().change_scene("res://scene/GameOver.tscn")

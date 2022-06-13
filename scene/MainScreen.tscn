@@ -27,9 +27,6 @@ tracks/0/keys = {
 position = Vector2( 164, 15 )
 scale = Vector2( 2.5, 2.5 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 61.6, 65.6 )
@@ -40,6 +37,36 @@ texture = ExtResource( 5 )
 position = Vector2( 64, 64 )
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 1, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Sprite2"]
+margin_left = -16.8
+margin_top = -1.2
+margin_right = 23.2
+margin_bottom = 38.8
+rect_scale = Vector2( 0.8, 0.8 )
+
+[node name="Easy" type="Label" parent="Sprite2/VBoxContainer"]
+margin_right = 42.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 1 )
+text = "Easy"
+align = 1
+
+[node name="Normal" type="Label" parent="Sprite2/VBoxContainer"]
+margin_top = 18.0
+margin_right = 42.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 1 )
+text = "Normal"
+align = 1
+
+[node name="Insane" type="Label" parent="Sprite2/VBoxContainer"]
+margin_top = 36.0
+margin_right = 42.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 1 )
+text = "Insane"
+align = 1
 
 [node name="Title" type="Label" parent="Sprite2"]
 margin_left = -31.0
@@ -52,11 +79,12 @@ Space"
 align = 1
 
 [node name="Label" type="Label" parent="Sprite2"]
-margin_left = -25.745
-margin_top = 20.977
-margin_right = 78.255
-margin_bottom = 34.977
-rect_scale = Vector2( 0.5, 0.5 )
+visible = false
+margin_left = -33.2
+margin_top = 12.8
+margin_right = 51.8
+margin_bottom = 26.8
+rect_scale = Vector2( 0.8, 0.8 )
 custom_fonts/font = ExtResource( 1 )
 text = "PRESS [SPACE]"
 align = 1

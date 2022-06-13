@@ -22,7 +22,7 @@ const EASY_MODE_PATTERN: Array = [
 	0, 3, 1, 0, 3, 2, 1, 2, 1, 2
 ]
 
-
+var current_level: int
 
 
 

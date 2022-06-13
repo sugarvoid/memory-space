@@ -53,8 +53,7 @@ custom_fonts/font = ExtResource( 1 )
 text = "Game Over"
 align = 1
 
-[node name="Label3" type="Label" parent="."]
-visible = false
+[node name="Progress" type="Label" parent="."]
 margin_left = 167.0
 margin_top = 172.0
 margin_right = 322.0

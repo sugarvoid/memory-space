@@ -1,10 +1,17 @@
 extends Node2D
 
+const level_string = "You made it to level %s"
+
+
 var p_square = preload("res://FallingSqure.tscn")
+
+
 
 func _ready() -> void:
 	$AnimationPlayer.play("blink")
 	$AudioStreamPlayer.play()
+	
+	$Progress.text = level_string % str(Global.current_level)
 
 
 func _input(event) -> void:
