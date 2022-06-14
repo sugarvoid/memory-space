@@ -12,12 +12,13 @@ func _ready() -> void:
 	$AudioStreamPlayer.play()
 	
 	$Progress.text = level_string % str(Global.current_level)
+	$LblMode.text = "Normal Mode"
 
 
 func _input(event) -> void:
 	if (event.is_action_pressed("space")):
 		$AudioStreamPlayer.stop()
-		var _x = get_tree().change_scene("res://Game.tscn")
+		var _x = get_tree().change_scene(Global.path_to_main_menu)
 
 
 func _on_TimerSquareSpawn_timeout():

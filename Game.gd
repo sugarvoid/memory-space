@@ -18,16 +18,11 @@ enum GAME_STATE {
 	POST_ROUND
 }
 
-enum GAME_MODE {
-	EASY,
-	NORMAL,
-	HARD
-}
+
 
 var rng :RandomNumberGenerator
 var is_level_over: bool = false
 var state = GAME_STATE.BEFORE_ROUND
-var game_mode = GAME_MODE.NORMAL
 var desired_pattern : Array
 var player_seleted_pattern : Array
 var player_current_guess: int
@@ -50,17 +45,27 @@ func _int_to_color(number: int) -> String:
 
 func _ready():
 	Global.current_level = 1
+	_update_mode_label()
 	rng = RandomNumberGenerator.new()
 	_fill_in_postions()
 	
 	
-	if game_mode == GAME_MODE.NORMAL:
+	if Global.game_mode == Global.GAME_MODE.NORMAL:
 		NORMAL_MODE_PATTERN.resize(50)
 		_create_normal_pattern()
 		
 	_start_new_level()
 
-
+func _update_mode_label() -> void:
+	var mode_text : String
+	match(Global.game_mode):
+		0:
+			mode_text = "Easy"
+		1:
+			mode_text = "Normal"
+		2:
+			mode_text = "Hard"
+	$LblMode.text = mode_text
 
 func _add_squares():
 	for c in square_container.get_children():
@@ -160,12 +165,13 @@ func _reset_player_guess() -> void:
 
 
 func _generate_level_pattern() -> void:
-	match(game_mode):
-		GAME_MODE.EASY:
-			desired_pattern = Global.EASY_MODE_PATTERN.slice(0, (Global.current_level - 1) )
-		GAME_MODE.NORMAL:
-			desired_pattern = NORMAL_MODE_PATTERN.slice(0, (Global.current_level - 1) )
-		GAME_MODE.HARD:
+	match(Global.game_mode):
+		Global.GAME_MODE.EASY:
+			desired_pattern = Global.EASY_MODE_PATTERN.slice(0, (Global.current_level - 1))
+		Global.GAME_MODE.NORMAL:
+			desired_pattern = NORMAL_MODE_PATTERN.slice(0, (Global.current_level - 1))
+		Global.GAME_MODE.HARD:
+			desired_pattern = Global.EASY_MODE_PATTERN.slice(0, (Global.current_level - 1)) #needed to fill array first...
 			for n in Global.current_level:
 				desired_pattern[n] = _get_random_number()
 

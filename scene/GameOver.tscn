@@ -53,6 +53,16 @@ custom_fonts/font = ExtResource( 1 )
 text = "Game Over"
 align = 1
 
+[node name="LblMode" type="Label" parent="."]
+margin_left = 168.0
+margin_top = 122.0
+margin_right = 323.0
+margin_bottom = 153.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 1 )
+text = "<mode>"
+align = 1
+
 [node name="Progress" type="Label" parent="."]
 margin_left = 167.0
 margin_top = 172.0

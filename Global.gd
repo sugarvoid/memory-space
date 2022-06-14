@@ -7,6 +7,14 @@ enum COLORS {
 	GREEN
 }
 
+enum GAME_MODE {
+	EASY,
+	NORMAL,
+	HARD
+}
+
+var game_mode: int
+
 const path_to_main_menu: String = "res://scene/MainScreen.tscn"
 
 const COLORS_2 : Dictionary = {
