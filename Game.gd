@@ -219,7 +219,6 @@ func _on_AnimationPlayer_animation_finished(anim_name) -> void:
 
 
 func _start_new_level() -> void:
-	print('hello')
 	is_level_over = false
 	player_current_guess = 0
 	_resizeArrays(Global.current_level)
