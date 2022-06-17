@@ -19,8 +19,9 @@ func _ready() -> void:
 
 
 func _input(event) -> void:
-#	if (event.is_action_pressed("space")):
-#		hold_time += 1
+	if (event.is_action_pressed("ui_cancel")):
+		get_tree().quit()
+
 ####### REPLACE WITH STATE MACHINE ###########
 	if (event.is_action_released("space")) and on_diff_selection:
 		print(the_child)
@@ -31,8 +32,6 @@ func _input(event) -> void:
 		$Sprite2/VBoxContainer.visible = true
 		$Sprite2/Label.visible = false
 		$AnimationPlayer.stop()
-		
-		##var _x = get_tree().change_scene("res://Game.tscn")
 		on_diff_selection = true
 	
 

@@ -34,5 +34,19 @@ const EASY_MODE_PATTERN: Array = [
 
 var current_level: int
 
+func _ready():
+	OS.window_size = Vector2(1280, 720)
+
+func get_mode_string() -> String:
+	var mode_text : String
+	match(Global.game_mode):
+		0:
+			mode_text = "Easy"
+		1:
+			mode_text = "Normal"
+		2:
+			mode_text = "Hard"
+	
+	return mode_text
 
 

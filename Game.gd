@@ -18,8 +18,6 @@ enum GAME_STATE {
 	POST_ROUND
 }
 
-
-
 var rng :RandomNumberGenerator
 var is_level_over: bool = false
 var state = GAME_STATE.BEFORE_ROUND
@@ -32,6 +30,18 @@ var NORMAL_MODE_PATTERN: Array = []
 var square_pos: Array
 
 
+func _ready():
+	Global.current_level = 1
+	_update_mode_label()
+	rng = RandomNumberGenerator.new()
+	_fill_in_postions()
+	
+	if Global.game_mode == Global.GAME_MODE.NORMAL:
+		NORMAL_MODE_PATTERN.resize(50)
+		_create_normal_pattern()
+		
+	_start_new_level()
+
 
 func _int_to_color(number: int) -> String:
 	var strings: Array = [
@@ -43,29 +53,9 @@ func _int_to_color(number: int) -> String:
 	return strings[number]
 
 
-func _ready():
-	Global.current_level = 1
-	_update_mode_label()
-	rng = RandomNumberGenerator.new()
-	_fill_in_postions()
-	
-	
-	if Global.game_mode == Global.GAME_MODE.NORMAL:
-		NORMAL_MODE_PATTERN.resize(50)
-		_create_normal_pattern()
-		
-	_start_new_level()
-
 func _update_mode_label() -> void:
-	var mode_text : String
-	match(Global.game_mode):
-		0:
-			mode_text = "Easy"
-		1:
-			mode_text = "Normal"
-		2:
-			mode_text = "Hard"
-	$LblMode.text = mode_text
+	$LblMode.text = Global.get_mode_string()
+
 
 func _add_squares():
 	for c in square_container.get_children():
@@ -109,7 +99,6 @@ func _update_level_label() -> void:
 
 
 func _compare_squares() -> void:
-	#print(square_container.get_children())
 	for c in square_container.get_children():
 		c.flip_over()
 		yield(get_tree().create_timer(1), "timeout")
@@ -121,7 +110,6 @@ func _fill_in_postions() -> void:
 	var x_value = starting_position.x
 	
 	for l in 100:
-		
 		if l == 10:
 			y_value = y_value + 70
 			x_value = starting_position.x
@@ -146,7 +134,6 @@ func _fill_in_postions() -> void:
 		var tempPos: Vector2 = Vector2(x_value, y_value)
 		
 		self.square_pos.append(tempPos)
-	
 
 
 func _spawnSquare(pos: Vector2) -> void:
@@ -196,7 +183,6 @@ func _check_results() -> void:
 		#square_container.get_child(n).show_result()
 
 
-
 func _show_desired_pattern() -> void:
 	_setup_sprites(desired_pattern)
 	for n in square_container.get_children():
@@ -204,18 +190,19 @@ func _show_desired_pattern() -> void:
 
 
 func _hide_desired_pattern() -> void:
-	#_setup_sprites()
 	for n in square_container.get_children():
 		n.squre_sprite.frame = 4
 
 
 func _setup_sprites(pattern: Array) -> void:
-
 	for c in $SquareContainer.get_children():
 		c.color = pattern[c.get_index()]
-	
+
 
 func _input(event) -> void:
+	if (event.is_action_pressed("ui_cancel")):
+		var _x = get_tree().change_scene(Global.path_to_main_menu)
+	
 	match(state):
 		GAME_STATE.DURING:
 			var current_square: Section = square_container.get_child(player_current_guess)
@@ -223,8 +210,6 @@ func _input(event) -> void:
 				player_seleted_pattern[player_current_guess] = $Wheel/Ball.get_color()
 				current_square.set_guess_sprite(player_seleted_pattern[player_current_guess])
 				current_square.show_player_guess()
-				#current_square.color = player_seleted_pattern[player_current_guess]
-				#current_square.flip_over()
 				player_current_guess += 1
 
 
@@ -237,11 +222,8 @@ func _start_new_level() -> void:
 	print('hello')
 	is_level_over = false
 	player_current_guess = 0
-	
 	_resizeArrays(Global.current_level)
-	
 	_generate_level_pattern()
-
 	_add_squares()
 	state = GAME_STATE.BEFORE_ROUND
 
