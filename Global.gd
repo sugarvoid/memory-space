@@ -34,8 +34,6 @@ const EASY_MODE_PATTERN: Array = [
 
 var current_level: int
 
-func _ready():
-	OS.window_size = Vector2(1280, 720)
 
 func get_mode_string() -> String:
 	var mode_text : String

@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Memory Space"
-run/main_scene="res://scene/SplashScreen.tscn"
+run/main_scene="res://scene/MainScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -32,6 +32,8 @@ Global="*res://Global.gd"
 
 window/size/width=640
 window/size/height=360
+window/size/test_width=1280
+window/size/test_height=720
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
