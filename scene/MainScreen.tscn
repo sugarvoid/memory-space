@@ -12,7 +12,7 @@ resource_name = "blink"
 length = 1.517
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite2/Label:visible")
+tracks/0/path = NodePath("Label:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -35,53 +35,54 @@ scale = Vector2( 134, 77.2 )
 texture = ExtResource( 5 )
 
 [node name="Sprite2" type="Sprite" parent="."]
-position = Vector2( 64, 64 )
+position = Vector2( 61.4, 64 )
+scale = Vector2( 1.85312, 1 )
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 1, 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Sprite2"]
-visible = false
-margin_left = -30.8
-margin_top = -0.799995
-margin_right = 52.2
-margin_bottom = 55.2
-rect_scale = Vector2( 0.8, 0.8 )
-
-[node name="Easy" parent="Sprite2/VBoxContainer" instance=ExtResource( 7 )]
-margin_right = 83.0
-
-[node name="Normal" parent="Sprite2/VBoxContainer" instance=ExtResource( 7 )]
-margin_top = 18.0
-margin_right = 83.0
-margin_bottom = 32.0
-text = "Normal"
-
-[node name="Hard" parent="Sprite2/VBoxContainer" instance=ExtResource( 7 )]
-margin_top = 36.0
-margin_right = 83.0
-margin_bottom = 50.0
-text = "Hard"
-
-[node name="Title" type="Label" parent="Sprite2"]
-margin_left = -30.8
-margin_top = -42.8
-margin_right = 31.2
-margin_bottom = -9.8
+[node name="Title" type="Label" parent="."]
+margin_left = 33.2
+margin_top = 21.2
+margin_right = 95.2
+margin_bottom = 54.2
 custom_fonts/font = ExtResource( 1 )
 text = "Memory
 Space"
 align = 1
 
-[node name="Label" type="Label" parent="Sprite2"]
+[node name="Label" type="Label" parent="."]
 visible = false
-margin_left = -33.2
-margin_top = 12.8
-margin_right = 51.8
-margin_bottom = 26.8
+margin_left = 30.8
+margin_top = 76.8
+margin_right = 115.8
+margin_bottom = 90.8
 rect_scale = Vector2( 0.8, 0.8 )
 custom_fonts/font = ExtResource( 1 )
 text = "PRESS [SPACE]"
 align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+margin_left = 33.2
+margin_top = 63.2
+margin_right = 116.2
+margin_bottom = 119.2
+rect_scale = Vector2( 0.8, 0.8 )
+
+[node name="Easy" parent="VBoxContainer" instance=ExtResource( 7 )]
+margin_right = 83.0
+
+[node name="Normal" parent="VBoxContainer" instance=ExtResource( 7 )]
+margin_top = 18.0
+margin_right = 83.0
+margin_bottom = 32.0
+text = "Normal"
+
+[node name="Hard" parent="VBoxContainer" instance=ExtResource( 7 )]
+margin_top = 36.0
+margin_right = 83.0
+margin_bottom = 50.0
+text = "Hard"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/blink = SubResource( 1 )

@@ -29,8 +29,8 @@ func _input(event) -> void:
 		var _x = get_tree().change_scene("res://Game.tscn")
 			
 	if (event.is_action_released("space")) and !on_diff_selection:
-		$Sprite2/VBoxContainer.visible = true
-		$Sprite2/Label.visible = false
+		$VBoxContainer.visible = true
+		$Label.visible = false
 		$AnimationPlayer.stop()
 		on_diff_selection = true
 	
@@ -39,9 +39,9 @@ func _step_through_modes():
 	the_child += 1
 	if the_child == 3:
 		the_child = 0
-	for c in $Sprite2/VBoxContainer.get_children():
+	for c in $VBoxContainer.get_children():
 		c.unhighlight()
-	$Sprite2/VBoxContainer.get_child(the_child).highlight()
+	$VBoxContainer.get_child(the_child).highlight()
 
 func _on_TimerCycle_timeout():
 	_step_through_modes()
