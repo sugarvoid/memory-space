@@ -50,6 +50,16 @@ text = "Memory
 Space"
 align = 1
 
+[node name="Title2" type="Label" parent="."]
+margin_left = 122.8
+margin_top = 110.8
+margin_right = 239.8
+margin_bottom = 124.8
+rect_scale = Vector2( 0.3, 0.3 )
+custom_fonts/font = ExtResource( 1 )
+text = "game by sugarvoid"
+align = 1
+
 [node name="Label" type="Label" parent="."]
 visible = false
 margin_left = 30.8

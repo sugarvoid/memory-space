@@ -84,7 +84,7 @@ func _process(_delta):
 		GAME_STATE.POST_ROUND:
 			if !is_level_over and done_checking:
 				_check_results()
-				$PostRoundTimer.start(4)
+				$PostRoundTimer.start(2)
 				is_level_over = true
 				done_checking = false
 
@@ -110,22 +110,22 @@ func _fill_in_postions() -> void:
 	var x_value = starting_position.x
 	
 	for l in 100:
+		if l == 5:
+			y_value = y_value + 70
+			x_value = starting_position.x
 		if l == 10:
 			y_value = y_value + 70
 			x_value = starting_position.x
+			#x_value = x_value + 40
+		if l == 15:
+			y_value = y_value + 70
+			x_value = starting_position.x
+			#x_value = x_value + 40
 		if l == 20:
 			y_value = y_value + 70
 			x_value = starting_position.x
 			#x_value = x_value + 40
-		if l == 30:
-			y_value = y_value + 70
-			x_value = starting_position.x
-			#x_value = x_value + 40
-		if l == 40:
-			y_value = y_value + 70
-			x_value = starting_position.x
-			#x_value = x_value + 40
-		if l == 50:
+		if l == 25:
 			y_value = y_value + 70
 			x_value = starting_position.x
 			#x_value = x_value + 40
