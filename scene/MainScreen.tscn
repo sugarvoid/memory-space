@@ -35,8 +35,8 @@ scale = Vector2( 134, 77.2 )
 texture = ExtResource( 5 )
 
 [node name="Sprite2" type="Sprite" parent="."]
-position = Vector2( 61.4, 64 )
-scale = Vector2( 1.85312, 1 )
+position = Vector2( 65.2, 67.2 )
+scale = Vector2( 1.50625, 1 )
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 1, 1 )
 
@@ -51,10 +51,10 @@ Space"
 align = 1
 
 [node name="Title2" type="Label" parent="."]
-margin_left = 122.8
-margin_top = 110.8
-margin_right = 239.8
-margin_bottom = 124.8
+margin_left = 104.4
+margin_top = 112.4
+margin_right = 221.4
+margin_bottom = 126.4
 rect_scale = Vector2( 0.3, 0.3 )
 custom_fonts/font = ExtResource( 1 )
 text = "game by sugarvoid"
