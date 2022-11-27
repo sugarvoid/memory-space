@@ -57,7 +57,7 @@ margin_right = 221.4
 margin_bottom = 126.4
 rect_scale = Vector2( 0.3, 0.3 )
 custom_fonts/font = ExtResource( 1 )
-text = "game by sugarvoid"
+text = "By SuperAirBoy"
 align = 1
 
 [node name="Label" type="Label" parent="."]
