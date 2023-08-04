@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var tween = get_node("Tween")
+onready var lbl_start = get_node("LblStart")
 
 
 const hover_color: Color = Color('FFA300')
@@ -24,13 +25,12 @@ func _input(event) -> void:
 
 ####### REPLACE WITH STATE MACHINE ###########
 	if (event.is_action_released("space")) and on_diff_selection:
-		print(the_child)
 		Global.game_mode = the_child
 		var _x = get_tree().change_scene("res://Game.tscn")
 			
 	if (event.is_action_released("space")) and !on_diff_selection:
 		$VBoxContainer.visible = true
-		$Label.visible = false
+		self.lbl_start.visible = false
 		$AnimationPlayer.stop()
 		on_diff_selection = true
 	

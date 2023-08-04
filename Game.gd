@@ -10,6 +10,8 @@ const level_string = "Level: %s"
 const row_one_y = 55
 const row_two_y = 95
 
+const MAX_LEVEL = 10 
+
 
 enum GAME_STATE {
 	BEFORE_ROUND,

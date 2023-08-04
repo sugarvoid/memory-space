@@ -12,7 +12,7 @@ resource_name = "blink"
 length = 1.517
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Label:visible")
+tracks/0/path = NodePath("LblStart:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -57,10 +57,10 @@ margin_right = 221.4
 margin_bottom = 126.4
 rect_scale = Vector2( 0.3, 0.3 )
 custom_fonts/font = ExtResource( 1 )
-text = "By SuperAirBoy"
+text = "By Sugarvoid"
 align = 1
 
-[node name="Label" type="Label" parent="."]
+[node name="LblStart" type="Label" parent="."]
 visible = false
 margin_left = 30.8
 margin_top = 76.8
